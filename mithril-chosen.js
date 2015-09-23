@@ -1,4 +1,9 @@
-var Chosen = Mithril.createClass({
+if (typeof module !== 'undefined') {
+  var m = require('mithril')
+  require('mithril-component')(m)
+}
+
+var Chosen = m.createClass({
   displayName: 'Chosen',
 
   componentDidUpdate: function () {
@@ -43,11 +48,14 @@ var Chosen = Mithril.createClass({
 
   view: function () {
     var selectProps = $.extend({}, this.props, {ref: 'select'})
-    return Mithril.createElement('div', null,
-      Mithril.createElement('select', selectProps, this.props.children)
+    return m.createElement('div', null,
+      m.createElement('select', selectProps, this.props.children)
     )
   }
 })
 
-module.exports = Chosen
-
+if (typeof module === 'undefined') {
+  window.Chosen = Chosen
+} else {
+  module.exports = Chosen
+}
